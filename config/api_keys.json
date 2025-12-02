@@ -1,0 +1,10 @@
+{
+  "football_data_org": "YOUR_API_KEY_HERE",
+  "api_football": "YOUR_API_KEY_HERE",
+  "openweathermap": "YOUR_API_KEY_HERE",
+  "odds_api": "YOUR_API_KEY_HERE",
+  "rapidapi": {
+    "key": "YOUR_API_KEY_HERE",
+    "host": "api-football-v1.p.rapidapi.com"
+  }
+}
