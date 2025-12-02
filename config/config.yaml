@@ -1,0 +1,16 @@
+data_collection:
+  sources:
+    - football-data.org
+    - api-football
+    - hollywoodbets
+    - betway
+  
+models:
+  ensemble_weights:
+    xgboost: 0.35
+    catboost: 0.30
+    neural_network: 0.25
+  
+prediction:
+  min_confidence: 0.65
+  max_predictions_per_day: 50
