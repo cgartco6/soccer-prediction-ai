@@ -1,0 +1,86 @@
+system:
+  device: "cuda" if available else "cpu"
+  batch_size: 32
+  num_workers: 4
+  cache_dir: "./data/cache"
+  
+data_collection:
+  sources:
+    - name: "Football-Data.org"
+      api_url: "https://api.football-data.org/v4"
+      rate_limit: 10
+      
+    - name: "API-Football"
+      api_url: "https://v3.football.api-sports.io"
+      rate_limit: 10
+      
+    - name: "SofaScore"
+      base_url: "https://www.sofascore.com"
+      
+    - name: "FlashScore"
+      base_url: "https://www.flashscore.com"
+      
+    - name: "HollywoodBets"
+      base_url: "https://www.hollywoodbets.net"
+      
+    - name: "Betway"
+      base_url: "https://www.betway.co.za"
+      
+    - name: "SportyBet"
+      base_url: "https://www.sportybet.com"
+      
+  leagues:
+    include_all: true
+    priority_leagues:
+      - "Premier League"
+      - "La Liga"
+      - "Bundesliga"
+      - "Serie A"
+      - "Ligue 1"
+      - "Champions League"
+      - "Europa League"
+      - "World Cup"
+      - "Women's World Cup"
+      
+models:
+  ensemble_weights:
+    xgboost: 0.35
+    catboost: 0.30
+    neural_network: 0.25
+    gradient_boosting: 0.10
+    
+  training:
+    validation_split: 0.2
+    test_split: 0.1
+    early_stopping_rounds: 50
+    n_estimators: 1000
+    
+features:
+  historical_matches: 10
+  include_features:
+    - "home_advantage"
+    - "form_last_5"
+    - "head_to_head"
+    - "injuries"
+    - "weather"
+    - "pitch_condition"
+    - "fatigue_days"
+    - "motivation_factor"
+    
+prediction:
+  min_confidence: 0.65
+  max_predictions_per_day: 50
+  output_format: "json"
+  
+database:
+  type: "postgresql"
+  host: "localhost"
+  port: 5432
+  name: "soccer_predictions"
+  user: "admin"
+  
+logging:
+  level: "INFO"
+  file: "./logs/predictions.log"
+  max_size: "100MB"
+  backup_count: 10
